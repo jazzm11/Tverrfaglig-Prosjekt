@@ -12,4 +12,7 @@ router.get('/register', userController.visRegistreringsside);
 router.post('/login', userController.loginPost);
 router.post('/register', userController.registerPost);
 
+// Logout Route
+router.get('/logout', userController.logout);
+
 module.exports = router;

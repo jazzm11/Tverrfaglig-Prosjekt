@@ -18,7 +18,9 @@ const loginPost = async (req, res) => {
 
         const user = await userRecord.comparePassword(passord);
         if (user) {
-            req.session.user = userRecord._id; // Store user ID in session
+            req.session.userID = userRecord._id; // Store user ID in session
+            req.session.username = userRecord.brukernavn; // Store username in session for easy access
+            console.log('Session data:', req.session); // Log session data for debugging
             res.redirect('/');
             console.log('Bruker logget inn:', userRecord.brukernavn);
         } else {
@@ -52,9 +54,21 @@ const registerPost = async (req, res) => {
     }
 };
 
+const logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Feil ved utlogging:', err);
+            return res.status(500).render('error', { error: err.message, title: 'Feil' });
+        }
+        res.redirect('/');
+    });
+    console.log('Bruker logget ut');
+}
+
 module.exports = {
     visLoginside,
     visRegistreringsside,
     loginPost,
-    registerPost
+    registerPost,
+    logout
 };
