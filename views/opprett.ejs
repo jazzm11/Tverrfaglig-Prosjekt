@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('./partials/header') %>
+
+    <body>
+        <%- include ('./partials/navbar') %>
+        <section>
+            <h1>Opprett en lenke</h1>
+            <form action="/opprett" method="POST">
+                <label for="navn">Navn av nettsiden:</label>
+                <input type="text" id="navn" name="navn" required><br><br>
+
+                <label for="lenke">Lenke:</label>
+                <input type="text" id="lenke" name="lenke" required><br><br>
+
+                <label for="bilde">Lenken til bilde:</label>
+                <input type="text" id="bilde" name="bilde"><br><br>
+
+                <label for="beskrivelse">Beskrivelse:</label>
+                <textarea id="beskrivelse" name="beskrivelse" required></textarea><br><br>
+                
+                <label for="dato">Dato:</label>
+                <input type="date" id="dato" name="dato" required><br><br>
+
+                <button type="submit">Opprett</button>
+        </section>
+
+        <%- include ('./partials/footer') %>
+    </body>
+
+</html>
