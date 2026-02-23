@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('./partials/header') %>
+
+    <body>
+        <%- include ('./partials/navbar') %>
+            <section>
+                <h1>Nettsider</h1>
+                <% if (nettsider.length> 0) { %>
+                    <ul>
+                        <% nettsider.forEach(website=> { %>
+                            <li>
+                                <div class="overview">
+                                    <div>
+                                        <a href="<%= website.lenke %>" target="_blank">
+                                            <%= website.navn %>
+                                        </a>
+                                        <p>
+                                            <%= website.beskrivelse %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        dato: <%= website.timestamps %>
+                                            publisert av: <%= website.publisertAv %>
+
+                                    </div>
+                                </div>
+
+                                <img src="<%= website.bilde %>" alt="Bilde av <%= website.navn %>">
+                            </li>
+                    </ul>
+                    <% }) %>
+                        <% } else { %>
+                            <p>Ingen nettsider funnet.</p>
+                            <% } %>
+            </section>
+
+            <%- include ('./partials/footer') %>
+    </body>
+
+</html>

@@ -1,10 +1,10 @@
 const User = require('../models/userModel');
 // GET
 const visLoginside = (req, res) => {
-    res.render('login', { title: 'Logg inn' });
+    res.render('login', { title: 'Logg inn', css: 'form.css' });
 }
 const visRegistreringsside = (req, res) => {
-    res.render('register', { title: 'Registrer' });
+    res.render('register', { title: 'Registrer', css: 'form.css' });
 }
 
 // POST
@@ -13,7 +13,7 @@ const loginPost = async (req, res) => {
         const { brukernavn, passord } = req.body;
         const userRecord = await User.findOne({ brukernavn });
         if (!userRecord) {
-            return res.status(400).send('Brukernavn eller passord er feil');
+            return res.status(400).send('Brukeren finnes ikke'); // User not found
         }
 
         const user = await userRecord.comparePassword(passord);
@@ -24,7 +24,7 @@ const loginPost = async (req, res) => {
             res.redirect('/');
             console.log('Bruker logget inn:', userRecord.brukernavn);
         } else {
-            res.status(400).send('Brukernavn eller passord er feil');
+            res.status(400).send('Passord er feil');
         }
     } catch (error) {
         res.status(500).render('error', { error: error.message, title: 'Feil' });

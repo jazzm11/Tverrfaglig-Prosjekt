@@ -28,10 +28,12 @@ connectDB(process.env.MONGO_URI);
 // Route Imports
 const defaultRouter = require("./router/defaultRouter");
 const userRouter = require("./router/userRouter");
+const vurderingRouter = require("./router/vurderingRouter");
 
 // Routes
 app.use(defaultRouter);
 app.use(userRouter);
+app.use(vurderingRouter);
 
 // Start server
 app.listen(PORT, () => {
