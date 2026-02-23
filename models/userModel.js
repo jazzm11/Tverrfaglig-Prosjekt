@@ -14,16 +14,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // Hash password before save
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("passord")) return next();
-
+userSchema.pre("save", async function () {
   try {
     this.passord = await argon2.hash(this.passord);
-    next();
   } catch (err) {
-    next(err);
+    console.log("Couldn't hash the password. Cause:", err);
   }
 });
+
 
 // Compare password (login)
 userSchema.methods.comparePassword = async function (plainPassword) {

@@ -1,5 +1,5 @@
 const visHjemmeside = (req, res) => {
-    res.render('register', { title: 'Hjemmeside' });
+    res.render('index', { title: 'Hjemmeside' });
 }
 
 module.exports = {
