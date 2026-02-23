@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('./partials/header') %>
+<link rel="stylesheet" href="/css/form.css">
+
+    <body>
+        <section>
+            <form action="/register" method="POST">
+                <div class="container">
+                    <h1>Register</h1>
+                    <label for="brukernavn"><b>Brukernavn</b></label>
+                    <input type="text" placeholder="Skriv inn brukernavn" name="brukernavn" required>
+
+                    <label for="passord"><b>Passord</b></label>
+                    <input type="password" placeholder="Skriv inn passord" name="passord" required>
+
+                    <label for="passord2"><b>Gjenta passord</b></label>
+                    <input type="password" placeholder="Gjenta passord" name="passord2" required>
+
+                    <button type="submit">Register</button>
+                </div>
+                <p>Har du allerede en konto? <a href="/login">Logg inn her</a></p>
+            </form>
+
+        </section>
+
+        <%- include ('./partials/footer') %>
+    </body>
+
+</html>
