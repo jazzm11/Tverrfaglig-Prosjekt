@@ -10,6 +10,7 @@ const auth = require('../middleware/auth')
 // GET Route
 router.get('/login', auth.redirectIfLoggedIn, userController.visLoginside);
 router.get('/register', auth.redirectIfLoggedIn, userController.visRegistreringsside);
+router.get('/profile', userController.visProfilSide);
 
 // POST Route
 router.post('/login', userController.loginPost);

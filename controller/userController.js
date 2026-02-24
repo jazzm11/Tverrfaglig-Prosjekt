@@ -6,6 +6,11 @@ const visLoginside = (req, res) => {
 const visRegistreringsside = (req, res) => {
   res.render("register", { title: "Registrer", css: "form.css" });
 };
+const visProfilSide = (req, res) => {
+  res.render("profil", { title: "Profil", css: "main.css", user: req.session.username });
+}
+
+
 
 // POST
 const loginPost = async (req, res) => {
@@ -76,4 +81,5 @@ module.exports = {
   loginPost,
   registerPost,
   logout,
+  visProfilSide
 };

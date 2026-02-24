@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header') %>
+
+    <body>
+        <%- include('./partials/navbar') %>
+            <section>
+
+                <h1>Profil</h1>
+
+                <% if (user) { %>
+                    <p>Velkommen, <%= user %>!</p><br>
+                    <a href="/logout">Logout</a>
+
+                    <% } else { %>
+                        <p>Du må logge inn først.</p>
+                        <% } %>
+            </section>
+
+            <%- include('./partials/footer') %>
+    </body>
+
+</html>

@@ -56,3 +56,18 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
+/* Logo */
+#logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+#logo:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

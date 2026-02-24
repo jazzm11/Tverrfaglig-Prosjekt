@@ -5,14 +5,13 @@
         <li><a href="/opprett">Opprett en nettside</a></li>
     </ul>
     <div>
-        <a href="/">
-            <img src="/images/logo.png" alt="Logo" style="height: 40px;">
+        <a href="/" id="logo">
+            Reviewa
         </a>
     </div>
     <ul>
         <% if (user) { %>
             <li><a href="/profile">Profil - <%= user %></a></li>
-            <li><a href="/logout">Logg ut</a></li>
             <% } else { %>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
