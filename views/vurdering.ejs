@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('./partials/header') %>
+
+    <body>
+
+        <%- include ('./partials/navbar') %>
+            <section>
+
+                <% if (nettside) { %>
+                    <h1>Vurder <%= nettside.navn %>
+                    </h1>
+                    <div class="container">
+                        <div class="img">
+                            <img src="<%= nettside.bilde %>" alt="<%= nettside.navn %>">
+                        </div>
+                        <div class="overview">
+                            <h2>
+                                <%= nettside.navn %>
+                            </h2><br>
+                            <p>
+                                <%= nettside.beskrivelse %>
+                            </p><br>
+                            <p>Publisert av: <%= nettside.publisertAv %>
+                            </p><br>
+                            <p>Dato: <%= nettside.timestamps %>
+                            </p><br>
+                            <p>WCAG Poeng: <%= avgScoreRounded %>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="comment-form">
+                        <form action="/vurdering/<%= nettside._id %>/kommentar" method="POST">
+
+                            <!-- Comment text -->
+                            <label for="tekst">Vurder</label>
+                            <textarea name="vurderingTekst" id="tekst" rows="4"
+                                placeholder="Skriv din vurdering av nettsiden..." required></textarea>
+
+                            <!-- WCAG Score -->
+                            <label for="wcagScore">WCAG score (1–10)</label>
+                            <select name="wcagScore" id="wcagScore" required>
+                                <% for(let i=1; i <=10; i++) { %>
+                                    <option value="<%= i %>">
+                                        <%= i %>
+                                    </option>
+                                    <% } %>
+                            </select>
+
+                            <button type="submit">Send vurdering</button>
+                        </form>
+                    </div>
+
+                    <% if (vurderingene.length> 0) { %>
+                        <div class="comments">
+                            <% vurderingene.forEach(komment=> { %>
+                                <div class="comment-box">
+                                    <div class="comment-header">
+                                        <span class="comment-user">
+                                            <%= komment.user %>
+                                        </span>
+                                        <span class="comment-score">WCAG: <%= komment.wcagScore %></span>
+                                    </div>
+
+                                    <div class="comment-text">
+                                        <%= komment.tekst %>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } else { %>
+                            <p>Ingen kommentar funnet.</p>
+                            <% } %>
+
+
+
+                                <% } else { %>
+                                    <p>Ingen nettsider funnet.</p>
+                                    <% } %>
+            </section>
+
+            <%- include ('./partials/footer') %>
+    </body>
+
+</html>
