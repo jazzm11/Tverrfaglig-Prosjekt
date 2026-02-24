@@ -4,10 +4,13 @@ const router = express.Router();
 // Controller Import
 const vurderingController = require('../controller/vurderingController');
 
+// Middleware Import
+const auth = require('../middleware/auth')
+
 // GET Route
-router.get('/opprett', vurderingController.visOpprettNettsted);
+router.get('/opprett', auth.redirectIfLoggedOut, vurderingController.visOpprettNettsted);
 router.get('/nettsider', vurderingController.visNettsider);
-router.get('/vurdering/:id', vurderingController.visVurderingSide);
+router.get('/vurdering/:id', auth.redirectIfLoggedOut, vurderingController.visVurderingSide);
 
 
 // POST Route

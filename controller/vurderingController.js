@@ -81,7 +81,7 @@ const opprettNettsted = (req, res) => {
 const lagreVurdering = async (req, res) => {
   try {
     const websiteId = req.params.id;
-    const user = req.session.username;
+    const user = req.session.username || "Anonymous";
     const { vurderingTekst, wcagScore } = req.body;
 
     await Review.create({

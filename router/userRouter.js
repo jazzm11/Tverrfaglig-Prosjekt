@@ -4,9 +4,12 @@ const router = express.Router();
 // Controller Import
 const userController = require('../controller/userController');
 
+// Middleware Import
+const auth = require('../middleware/auth')
+
 // GET Route
-router.get('/login', userController.visLoginside);
-router.get('/register', userController.visRegistreringsside);
+router.get('/login', auth.redirectIfLoggedIn, userController.visLoginside);
+router.get('/register', auth.redirectIfLoggedIn, userController.visRegistreringsside);
 
 // POST Route
 router.post('/login', userController.loginPost);
