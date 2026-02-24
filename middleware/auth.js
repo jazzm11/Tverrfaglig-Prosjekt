@@ -3,7 +3,7 @@ function redirectIfLoggedOut(req, res, next) {
     return next();
   }
 
-  return res.redirect("/register");
+  return res.redirect("/login");
 }
 
 function redirectIfLoggedIn(req, res, next) {

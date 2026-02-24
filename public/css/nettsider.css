@@ -19,24 +19,36 @@
 }
 
 .overview {
-    display: flex;
-    margin: 10px;
+  display: flex;
+  margin: 10px;
 }
 .overview div {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .title a {
-    font-size: 2em; 
+  font-size: 2em;
 }
 
 .date {
-    align-items: end;
+  align-items: end;
 }
 
 .nettside-bilde {
   width: 500px;
   height: auto;
+}
+
+#vurder-btn {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-left: 85%;
 }
