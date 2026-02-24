@@ -7,11 +7,11 @@
             <section>
                 <h1>Nettsider</h1>
                 <% if (nettsider.length> 0) { %>
-                    <ul>
+                    <ul class="nettside">
                         <% nettsider.forEach(website=> { %>
                             <li>
                                 <div class="overview">
-                                    <div>
+                                    <div class="title">
                                         <a href="<%= website.lenke %>" target="_blank">
                                             <%= website.navn %>
                                         </a>
@@ -19,20 +19,32 @@
                                             <%= website.beskrivelse %>
                                         </p>
                                     </div>
-                                    <div>
-                                        dato: <%= website.timestamps %>
-                                            publisert av: <%= website.publisertAv %>
+                                    <div class="date">
+                                        <p><b>Dato:</b>
+                                            <%= website.timestamps %>
+                                        </p>
+                                        <p><b>Publisert av:</b>
+                                            <%= website.publisertAv %>
+                                        </p>
 
                                     </div>
                                 </div>
+                                <div>
+                                    <img src="<%= website.bilde %>" alt="Bilde av <%= website.navn %>"
+                                        class="nettside-bilde">
+                                    <a href="/vurdering/<%= website._id %>">
+                                        <button>Vurder nettsiden</button>
+                                    </a>
+                                </div>
 
-                                <img src="<%= website.bilde %>" alt="Bilde av <%= website.navn %>">
+
                             </li>
+
+                            <% }) %>
                     </ul>
-                    <% }) %>
-                        <% } else { %>
-                            <p>Ingen nettsider funnet.</p>
-                            <% } %>
+                    <% } else { %>
+                        <p>Ingen nettsider funnet.</p>
+                        <% } %>
             </section>
 
             <%- include ('./partials/footer') %>
