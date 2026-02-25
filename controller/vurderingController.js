@@ -12,6 +12,18 @@ const visOpprettNettsted = (req, res) => {
   });
 };
 
+const visRapportSide = async (req, res) => {
+  const rapporter = await Report.find();
+
+  res.render("rapport", {
+    rapporter,
+    user: req.session.username,
+    role: req.session.role,
+    title: "Rapporter",
+    css: "rapporter.css",
+  });
+};
+
 const visNettsider = async (req, res) => {
   try {
     const nettsider = await Website.find().sort({ createdAt: -1 });
@@ -118,9 +130,13 @@ const slettPoster = async (req, res) => {
 const sendRapport = async (req, res) => {
   try {
     const { grunn } = req.body;
+    const id = req.params.id;
+
+    const kommentar = await Review.findById(id);
 
     await Report.create({
-      kommentarId: req.params.id,
+      kommentarId: id,
+      kommentar: kommentar.tekst,
       rapportertAv: req.session.username,
       grunn,
     });
@@ -132,6 +148,18 @@ const sendRapport = async (req, res) => {
   }
 };
 
+const slettKommentar = async (req, res) => {
+  await Review.findByIdAndDelete(req.params.id);
+  console.log("Kommentar slettet");
+  res.redirect("/rapport");
+};
+
+const slettRapport = async (req, res) => {
+  await Report.findByIdAndDelete(req.params.id);
+  console.log("Rapport slettet");
+  res.redirect("/rapport");
+};
+
 module.exports = {
   visOpprettNettsted,
   opprettNettsted,
@@ -139,5 +167,8 @@ module.exports = {
   visVurderingSide,
   lagreVurdering,
   slettPoster,
-  sendRapport
+  sendRapport,
+  slettKommentar,
+  slettRapport,
+  visRapportSide,
 };

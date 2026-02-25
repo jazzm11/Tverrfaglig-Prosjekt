@@ -1,4 +1,6 @@
 const User = require("../models/userModel");
+const Report = require("../models/reportModel");
+
 // GET
 const visLoginside = (req, res) => {
   res.render("login", { title: "Logg inn", css: "form.css" });
@@ -14,6 +16,7 @@ const visProfilSide = (req, res) => {
     role: req.session.role,
   });
 };
+
 
 // POST
 const loginPost = async (req, res) => {

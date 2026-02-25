@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('./partials/header') %>
+
+    <body>
+        <%- include ('./partials/navbar') %>
+            <section>
+                <div class="container">
+                    <h1>Rapporter</h1>
+
+                    <% if (rapporter.length===0) { %>
+                        <p>Ingen rapporter.</p>
+                        <% } %>
+
+                            <div class="rapport-liste">
+                                <% rapporter.forEach(r=> { %>
+                                    <div class="rapport-card">
+
+                                        <div class="rapport-header">
+                                            <span class="badge">Rapport</span>
+                                            <span class="dato">
+                                                <%= new Date(r.opprettet).toLocaleDateString() %>
+                                            </span>
+                                        </div>
+
+                                        <div class="rapport-body">
+                                            <p class="label">Kommentar</p>
+                                            <p class="kommentar">
+                                                <%= r.kommentar %>
+                                            </p>
+
+                                            <div class="meta">
+                                                <div>
+                                                    <span class="label">Rapport av</span>
+                                                    <p>
+                                                        <%= r.rapportertAv %>
+                                                    </p>
+                                                </div>
+
+                                                <div>
+                                                    <span class="label">Grunn</span>
+                                                    <p class="grunn">
+                                                        <%= r.grunn %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="actions">
+                                            <form action="/kommentar/<%= r.kommentarId %>/slett" method="POST">
+                                                <button class="delete">Slett kommentar</button>
+                                            </form>
+
+                                            <form action="/rapport/<%= r._id %>/slett" method="POST">
+                                                <button class="clear">Fjern rapport</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <% }) %>
+                            </div>
+            </section>
+
+            <%- include ('./partials/footer') %>
+
+    </body>
+
+</html>

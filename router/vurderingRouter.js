@@ -12,6 +12,10 @@ router.get('/opprett', auth.redirectIfLoggedOut, vurderingController.visOpprettN
 router.get('/nettsider', vurderingController.visNettsider);
 router.get('/nettsider/:id/slett', vurderingController.slettPoster);
 router.get('/vurdering/:id', auth.redirectIfLoggedOut, vurderingController.visVurderingSide);
+router.get('/rapport', auth.isAdmin, vurderingController.visRapportSide);
+router.post('/rapport/:id/slett', vurderingController.slettRapport);
+router.post('/kommentar/:id/slett', vurderingController.slettKommentar);
+
 
 
 

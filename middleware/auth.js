@@ -14,4 +14,12 @@ function redirectIfLoggedIn(req, res, next) {
 }
 
 
-module.exports = { redirectIfLoggedOut, redirectIfLoggedIn };
+function isAdmin(req, res, next) {
+  if (req.session.role === 'admin') {
+    return next();
+  }
+
+  return res.redirect("/login");
+}
+
+module.exports = { redirectIfLoggedOut, redirectIfLoggedIn, isAdmin };
