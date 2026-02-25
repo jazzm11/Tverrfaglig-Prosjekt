@@ -35,6 +35,11 @@
                                     <a href="/vurdering/<%= website._id %>">
                                         <button id="vurder-btn">Vurder nettsiden</button>
                                     </a>
+                                    <% if (role==='admin' ) { %>
+                                        <a href="/nettsider/<%= website._id %>/slett">
+                                            <button id="slett-btn">Slett post</button>
+                                        </a>
+                                        <% } %>
                                 </div>
 
 

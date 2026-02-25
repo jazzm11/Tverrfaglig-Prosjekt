@@ -16,6 +16,7 @@ const visNettsider = async (req, res) => {
     res.render("nettsider", {
       title: "Nettsider",
       user: req.session.username,
+      role: req.session.role,
       css: "nettsider.css",
       nettsider,
     });
@@ -48,10 +49,11 @@ const visVurderingSide = async (req, res) => {
     res.render("vurdering", {
       title: "Vurder",
       user: req.session.username,
+      role: req.session.role,
       css: "vurdering.css",
       nettside,
       vurderingene,
-      avgScoreRounded
+      avgScoreRounded,
     });
   } catch (error) {
     console.error(error);
@@ -91,8 +93,21 @@ const lagreVurdering = async (req, res) => {
       wcagScore,
     });
 
-    console.log('Nettsiden vurdert')
+    console.log("Nettsiden vurdert");
     res.redirect("/vurdering/" + websiteId);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const slettPoster = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Website.findByIdAndDelete(id);
+
+    await Review.deleteMany({ websiteId: id });
+    console.log("Nettsiden slettet av admin");
+    res.redirect("/nettsider");
   } catch (error) {
     console.error(error);
   }
@@ -104,4 +119,5 @@ module.exports = {
   visNettsider,
   visVurderingSide,
   lagreVurdering,
+  slettPoster,
 };

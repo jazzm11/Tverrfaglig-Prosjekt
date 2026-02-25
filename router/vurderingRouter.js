@@ -10,6 +10,7 @@ const auth = require('../middleware/auth')
 // GET Route
 router.get('/opprett', auth.redirectIfLoggedOut, vurderingController.visOpprettNettsted);
 router.get('/nettsider', vurderingController.visNettsider);
+router.get('/nettsider/:id/slett', vurderingController.slettPoster);
 router.get('/vurdering/:id', auth.redirectIfLoggedOut, vurderingController.visVurderingSide);
 
 

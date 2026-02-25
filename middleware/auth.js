@@ -13,4 +13,5 @@ function redirectIfLoggedIn(req, res, next) {
   next();
 }
 
+
 module.exports = { redirectIfLoggedOut, redirectIfLoggedIn };
