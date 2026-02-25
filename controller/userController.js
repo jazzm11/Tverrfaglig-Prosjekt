@@ -7,10 +7,13 @@ const visRegistreringsside = (req, res) => {
   res.render("register", { title: "Registrer", css: "form.css" });
 };
 const visProfilSide = (req, res) => {
-  res.render("profil", { title: "Profil", css: "main.css", user: req.session.username });
-}
-
-
+  res.render("profil", {
+    title: "Profil",
+    css: "main.css",
+    user: req.session.username,
+    role: req.session.role,
+  });
+};
 
 // POST
 const loginPost = async (req, res) => {
@@ -25,6 +28,7 @@ const loginPost = async (req, res) => {
     if (user) {
       req.session.userID = userRecord._id; // Store user ID in session
       req.session.username = userRecord.brukernavn; // Store username in session for easy access
+      req.session.role = userRecord.role;
       console.log("Session data:", req.session); // Log session data for debugging
       res.redirect("/");
       console.log("Bruker logget inn:", userRecord.brukernavn);
@@ -51,11 +55,11 @@ const registerPost = async (req, res) => {
     // Auto-login med en gang
     req.session.userID = userSaved._id;
     req.session.username = userSaved.brukernavn;
+    req.session.role = userRecord.role;
 
     console.log("Session etter registrering:", req.session);
 
     res.redirect("/");
-
   } catch (error) {
     res.status(500).render("error", { error: error.message, title: "Feil" });
     console.error("Feil ved registrering:", error);
@@ -81,5 +85,5 @@ module.exports = {
   loginPost,
   registerPost,
   logout,
-  visProfilSide
+  visProfilSide,
 };
