@@ -62,7 +62,28 @@
                                         <span class="comment-user">
                                             <%= komment.user %>
                                         </span>
-                                        <span class="comment-score">WCAG: <%= komment.wcagScore %></span>
+                                        <div>
+                                            <span class="comment-score">WCAG: <%= komment.wcagScore %></span>
+                                            <btn class="comment-rapport-btn"
+                                                onclick="openReport('<%= komment._id %>')">Rapport</btn>
+                                        </div>
+
+                                        <!-- REPORT SIDEBAR -->
+                                        <div id="reportSidebar" class="report-sidebar">
+                                            <div class="report-content">
+                                                <span class="close-btn" onclick="closeReport()">×</span>
+
+                                                <h3>Rapporter kommentar</h3>
+
+                                                <form id="reportForm" method="POST">
+                                                    <label>Hvorfor rapporterer du denne kommentaren?</label>
+
+                                                    <textarea name="grunn" id="grunn" placeholder="skriv her"></textarea>
+
+                                                    <button type="submit">Send rapport</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="comment-text">
@@ -84,5 +105,18 @@
 
             <%- include ('./partials/footer') %>
     </body>
+    <script>
+        function openReport(commentId) {
+            const sidebar = document.getElementById("reportSidebar");
+            const form = document.getElementById("reportForm");
+
+            form.action = `/vurdering/${commentId}/rapporter`;
+            sidebar.classList.add("active");
+        }
+
+        function closeReport() {
+            document.getElementById("reportSidebar").classList.remove("active");
+        }
+    </script>
 
 </html>

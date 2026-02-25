@@ -14,9 +14,11 @@ router.get('/nettsider/:id/slett', vurderingController.slettPoster);
 router.get('/vurdering/:id', auth.redirectIfLoggedOut, vurderingController.visVurderingSide);
 
 
+
 // POST Route
 router.post('/opprett', vurderingController.opprettNettsted);
 router.post('/vurdering/:id/kommentar', vurderingController.lagreVurdering);
+router.post('/vurdering/:id/rapporter', vurderingController.sendRapport);
 
 
 module.exports = router;
