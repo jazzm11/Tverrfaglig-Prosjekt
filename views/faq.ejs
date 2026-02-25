@@ -1,0 +1,116 @@
+<!-- FAQ.ejs -->
+<!DOCTYPE html>
+<html lang="no">
+
+<%- include ('./partials/header') %>
+
+    <body>
+            <%- include ('./partials/navbar') %>
+        <section>
+
+                <h1>FAQ – Nettsidevurdering</h1>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hva er formålet med denne nettsiden?</div>
+                    <div class="faq-answer">Nettsiden lar brukere publisere egne nettsider og få tilbakemeldinger fra
+                        andre.
+                        Andre brukere kan vurdere nettsider basert på innhold, design og funksjonalitet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvordan fungerer vurderingene?</div>
+                    <div class="faq-answer">Når en nettside publiseres, kan andre brukere legge inn en vurdering og
+                        eventuelt en kommentar. Vurderingen kan ha en skår (for eksempel 1–10) og en kort tekst.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvem kan bruke nettsiden?</div>
+                    <div class="faq-answer">Alle kan registrere seg som vanlig bruker (User) og legge ut eller vurdere
+                        nettsider.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvilke roller finnes på nettsiden?</div>
+                    <div class="faq-answer">
+                        Det finnes to roller:
+                        <ul>
+                            <li><strong>User:</strong> Kan publisere og vurdere nettsider, samt kommentere.</li>
+                            <li><strong>Admin:</strong> Har tilgang til rapporter, kan slette nettsider og fjerne
+                                upassende
+                                kommentarer.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvordan blir jeg admin?</div>
+                    <div class="faq-answer">Admin-rettigheter gis manuelt av systemet. Vanlige brukere kan ikke
+                        oppgradere
+                        seg selv. Men du kan sende en melding til jazzunciano1@gmail.com for å bli en admin.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvordan publiserer jeg en nettside?</div>
+                    <div class="faq-answer">Klikk på “Opprett nettside” i menyen og fyll ut navn, URL, beskrivelse og
+                        bilde
+                        (eller screenshot). Etter innsending blir nettsiden synlig for alle brukere.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvordan vurderer jeg en nettside?</div>
+                    <div class="faq-answer">Gå til nettsiden du vil vurdere, fyll ut vurderingstekst og skår, og trykk
+                        “Send”. Din vurdering vil bli lagt til siden umiddelbart.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Kan jeg redigere eller slette mine vurderinger?</div>
+                    <div class="faq-answer">Foreløpig kan kun admins slette kommentarer hvis de rapporteres som negative
+                        eller upassende. Vanlige brukere kan ikke endre vurderinger etter innsending.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hva kan en admin gjøre?</div>
+                    <div class="faq-answer">
+                        Admins kan:
+                        <ul>
+                            <li>Se rapporter over nettsider og kommentarer.</li>
+                            <li>Slette nettsider som bryter regler eller er upassende.</li>
+                            <li>Fjerne negative eller rapporterte kommentarer.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Hvordan rapporteres kommentarer eller nettsider?</div>
+                    <div class="faq-answer">Brukere kan rapportere upassende kommentarer eller nettsider. Admin får da
+                        beskjed og kan velge å fjerne innholdet.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Er det trygt å bruke nettsiden?</div>
+                    <div class="faq-answer">Ja, vi lagrer kun nødvendig informasjon og vurderinger anonymt med
+                        brukernavn.
+                        Admins har tilgang til rapporter for moderering, men ikke til personlige passord.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Kan andre se hvem som vurderte en nettside?</div>
+                    <div class="faq-answer">Ja, vurderinger vises med brukernavn, men ingen sensitiv informasjon deles.
+                    </div>
+                </div>
+        </section>
+
+        <%- include ('./partials/footer') %>
+
+            <script>
+                const questions = document.querySelectorAll(".faq-question");
+                questions.forEach(q => {
+                    q.addEventListener("click", () => {
+                        const answer = q.nextElementSibling;
+                        answer.style.display = answer.style.display === "block" ? "none" : "block";
+                    });
+                });
+            </script>
+    </body>
+
+</html>

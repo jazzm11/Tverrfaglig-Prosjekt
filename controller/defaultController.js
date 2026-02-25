@@ -7,6 +7,16 @@ const visHjemmeside = (req, res) => {
   });
 };
 
+const visFaqSide = (req, res) => {
+  res.render("faq", {
+    title: "Faq",
+    user: req.session.username,
+    css: "faq.css",
+    role: req.session.role,
+  });
+}
+
 module.exports = {
   visHjemmeside,
+  visFaqSide,
 };

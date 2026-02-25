@@ -6,5 +6,8 @@ const defaultController = require('../controller/defaultController');
 
 // Default route
 router.get('/', defaultController.visHjemmeside);
+router.get('/faq', defaultController.visFaqSide);
+
+
 
 module.exports = router;
