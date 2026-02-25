@@ -1,11 +1,13 @@
 const Website = require("../models/websiteModel");
 const Review = require("../models/vurderModel");
+const Report = require("../models/reportModel");
 
 // GET
 const visOpprettNettsted = (req, res) => {
   res.render("opprett", {
     title: "Opprett Nettsted",
     user: req.session.username,
+    role: req.session.role,
     css: "opprett.css",
   });
 };
@@ -113,6 +115,23 @@ const slettPoster = async (req, res) => {
   }
 };
 
+const sendRapport = async (req, res) => {
+  try {
+    const { grunn } = req.body;
+
+    await Report.create({
+      kommentarId: req.params.id,
+      rapportertAv: req.session.username,
+      grunn,
+    });
+
+    console.log("Rapport er sendt til admin");
+    res.redirect("/nettsider");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   visOpprettNettsted,
   opprettNettsted,
@@ -120,4 +139,5 @@ module.exports = {
   visVurderingSide,
   lagreVurdering,
   slettPoster,
+  sendRapport
 };

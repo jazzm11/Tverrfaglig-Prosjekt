@@ -115,8 +115,52 @@ form button:active {
   border-radius: 6px;
 }
 
+.comment-rapport-btn {
+  font-size: 0.85rem;
+  background-color: #ffe8e8;
+  color: #cc0000;
+  padding: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 .comment-text {
   font-size: 0.95rem;
   color: #444;
   line-height: 1.4;
+}
+
+/*Rapport Sidebar */
+.report-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 9999;
+}
+
+.report-sidebar.active {
+  right: 0;
+}
+
+.report-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.close-btn {
+  font-size: 24px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.report-content button {
+  padding: 8px;
+  font-size: 14px;
 }
