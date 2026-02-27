@@ -58,13 +58,12 @@ const registerPost = async (req, res) => {
     // Auto-login med en gang
     req.session.userID = userSaved._id;
     req.session.username = userSaved.brukernavn;
-    req.session.role = userRecord.role;
+    req.session.role = userSaved.role;
 
     console.log("Session etter registrering:", req.session);
 
     res.redirect("/");
   } catch (error) {
-    res.status(500).render("error", { error: error.message, title: "Feil" });
     console.error("Feil ved registrering:", error);
   }
 };

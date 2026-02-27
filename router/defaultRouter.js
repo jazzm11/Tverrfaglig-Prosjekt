@@ -7,6 +7,7 @@ const defaultController = require('../controller/defaultController');
 // Default route
 router.get('/', defaultController.visHjemmeside);
 router.get('/faq', defaultController.visFaqSide);
+router.get('/error', defaultController.visErrorSide);
 
 
 
