@@ -4,6 +4,149 @@ Et nettsted hvor brukere kan dele og lese WCAG-vurderinger av nettsteder. System
 
 ---
 
+## 🌐 Nettverksarkitektur
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     INTERNET / BRUKERE                       │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         │ HTTP/HTTPS
+                         ▼
+        ┌────────────────────────────────┐
+        │   Webserver (Node.js/Express)  │
+        │      IP: 10.12.9.60:3000       │
+        │    - app.js                    │
+        │    - Controllers               │
+        │    - Routes                    │
+        │    - Views (EJS)               │
+        └────────┬───────────────────────┘
+                 │
+                 │ MONGO_URI
+                 │ Connection
+                 ▼
+        ┌────────────────────────────────┐
+        │      MongoDB Database          │
+        │    IP: 10.12.9.40:27017        │
+        │    Database: vurderingDB       │
+        │  - Users                       │
+        │  - Websites                    │
+        │  - Reviews (WCAG)              │
+        │  - Reports/Reactions           │
+        └────────────────────────────────┘
+
+        ┌────────────────────────────────┐
+        │        DNS Server              │
+        │      IP: 10.12.9.65:53         │
+        │    - Domain Resolution         │
+        └────────────────────────────────┘
+```
+
+---
+
+## 🏗️ Teknisk Infrastruktur
+
+| Komponent | IP-adresse | Port | Funksjon |
+|-----------|-----------|------|----------|
+| **Webserver** | 10.12.9.60 | 3000 | Node.js Express-applikasjon |
+| **MongoDB** | 10.12.9.40 | 27017 | Database – brukerdata, vurderinger, nettsteder |
+| **DNS** | 10.12.9.65 | 53 | Navnoppløsning og domenehåndtering |
+
+### Miljøvariabler (.env)
+```env
+MONGO_URI=mongodb://10.12.9.40:27017/vurderingDB
+SESSION_SECRET=jazzjazzjazz
+```
+
+---
+
+## 🚀 Installasjon og Setup
+
+### Forutsetninger
+- Node.js v14+ (eller høyere)
+- MongoDB kjørende på `10.12.9.40:27017`
+- NPM eller Yarn
+- Git (for versjonskontroll)
+
+### Steg 1: Klone eller last ned prosjektet
+```bash
+git clone <repository-url>
+cd tverrfaglig_prosjekt
+```
+
+### Steg 2: Installer avhengigheter
+```bash
+npm install
+```
+
+### Steg 3: Konfigurer miljøvariabler
+Opprett eller rediger `.env`-fil i rotmappen:
+```env
+MONGO_URI=mongodb://10.12.9.40:27017/vurderingDB
+SESSION_SECRET=din_hemmelighet_her
+```
+
+### Steg 4: Verifiser MongoDB-tilkobling
+Sjekk at MongoDB kjører på:
+```
+mongodb://10.12.9.40:27017
+```
+
+### Steg 5: Start serveren
+```bash
+node app.js
+```
+
+**Output:**
+```
+Server is running on port 3000
+```
+
+Åpne nettleseren og gå til:
+```
+http://10.12.9.60:3000
+```
+
+---
+
+## 📞 Brukerstøtte
+
+### Kommunikasjonsplan
+Brukere kan få hjelp via tre kanaler:
+
+| Kanal | Bruk | Responstid |
+|-------|------|------------|
+| **FAQ-side** | Vanlige spørsmål – `/faq` | Umiddelbar |
+| **Kontakt-epost** | Generelle henvendelser | 24–48 timer |
+| **Administrator** | Moderering og problemer | 24–48 timer |
+
+### Innebygget hjelpesystem
+
+#### 📚 **FAQ-side** (`/faq`)
+Inneholder svar på:
+- Hvordan publisere et nettsted?
+- Hva er WCAG og vurderingskriterier?
+- Hvordan opprettet jeg en bruker?
+- Hvordan gir jeg en vurdering?
+
+#### 📝 **Forklarende tekster**
+Hver side har:
+- Klare instruksjoner under overskrifter
+- Hjelpetekster og tooltips i skjemaer
+- Brukervennlige feiltilbakemeldinger
+
+#### 🎯 **Skjema med instruksjoner**
+- **Registrering:** Krav til brukernavn (3-20 tegn) og passord (8+ tegn)
+- **Nettsted-opprettelse:** Fyll inn URL, navn og beskrivelse
+- **WCAG-vurdering:** Velg nivå (A / AA / AAA) og skriv kommentarer
+
+### Forebyggende tiltak
+- Valideringsfeil vises umiddelbart i skjemaer
+- Passord sjekkes for styrke
+- Duplikate brukernavn avvises
+
+---
+
 ## 📋 Systembeskrivelse
 
 ### Formål
@@ -187,81 +330,6 @@ const auth = (req, res, next) => {
 ```
 
 Brukes på beskyttede ruter som `/profil` og `/vurdering`.
-
----
-
-## 🚀 Installasjon og Setup
-
-### Forutsetninger
-- Node.js v14+
-- MongoDB kjørende på `10.12.9.40:27017`
-- NPM eller Yarn
-
-### Installer avhengigheter
-```bash
-npm install
-```
-
-### Konfigurer miljøvariabler (.env)
-```env
-MONGO_URI=mongodb://10.12.9.40:27017/vurderingDB
-SESSION_SECRET=din_hemmelighet_her
-```
-
-### Start serveren
-```bash
-node app.js
-```
-
-Server kjører på: `http://10.12.9.60:3000`
-
----
-
-## 📞 Brukerstøtte
-
-### Kommunikasjonsplan
-Brukere kan få hjelp via:
-- **Kontakt-epost** – For generelle spørsmål
-- **Admin** – For moderering og problemer
-- **FAQ-side** – Innebygd hjelp (`/faq`)
-
-**Forventet responstid:** 24–48 timer
-
-### Innebygget hjelpesystem
-Nettsiden inneholder:
-
-#### **FAQ-side** (`/faq`)
-Ofte stilte spørsmål om:
-- Hvordan publisere et nettsted
-- WCAG-vurderingskriterier
-- Slik bruker du systemet
-
-#### **Forklarende tekster**
-Hver side inneholder:
-- Instruksjoner under overskrifter
-- Hjelpetekster ved skjemaer
-- Feiltilbakemeldinger
-
-#### **Skjema med instruksjoner**
-- Registrering: Krav til brukernavn/passord
-- Nettsted-opprettelse: Fyll inn URL, navn, beskrivelse
-- Vurdering: Velg WCAG-nivå (A/AA/AAA)
-
----
-
-## 🌐 Teknisk Infrastruktur
-
-| Komponent | IP-adresse | Port | Bruk |
-|-----------|-----------|------|------|
-| **Webserver** | 10.12.9.60 | 3000 | Node.js applikasjon |
-| **MongoDB** | 10.12.9.40 | 27017 | Database |
-| **DNS** | 10.12.9.65 | 53 | Navnoppløsning |
-
-### Konfigurering
-Alle tilkoblinger konfigureres i `.env`:
-```env
-MONGO_URI=mongodb://10.12.9.40:27017/vurderingDB
-```
 
 ---
 
