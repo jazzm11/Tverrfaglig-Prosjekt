@@ -23,7 +23,7 @@ app.use(
 
 // Database connection
 const connectDB = require("./config/db");
-connectDB(process.env.MONGO_URI);
+connectDB(process.env.MONGO_URL);
 
 // Route Imports
 const defaultRouter = require("./router/defaultRouter");
